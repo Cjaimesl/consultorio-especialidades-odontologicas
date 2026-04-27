@@ -4,6 +4,8 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 
+import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
+
 const figtree = Figtree({subsets:['latin'],variable:'--font-sans'})
 
 const fontMono = Geist_Mono({
@@ -20,10 +22,19 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", figtree.variable)}
+      className={cn(
+        "antialiased",
+        fontMono.variable,
+        "font-sans",
+        figtree.variable
+      )}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <SmoothScrollProvider>
+          <ThemeProvider>
+            <div className="page-container">{children}</div>
+          </ThemeProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   )
